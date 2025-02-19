@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - NPC
+  - Potal
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NPC
   - Water
   - UI
   - 
@@ -41,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1577587583
     locked: 0
