@@ -5,6 +5,7 @@ public class Player_Animation : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private Camera mainCamera;
+    private bool isDead = false; // 사망 상태 확인
 
     void Start()
     {
@@ -15,6 +16,8 @@ public class Player_Animation : MonoBehaviour
 
     public void UpdateAnimation(Vector2 movement)
     {
+        if (isDead) return; // 사망 상태면 애니메이션 업데이트 중지
+
         bool isAttacking = Input.GetMouseButton(0); // 마우스 왼쪽 버튼 공격
 
         ResetAnimations(); // 기존 애니메이션 초기화
@@ -60,5 +63,15 @@ public class Player_Animation : MonoBehaviour
         animator.SetBool("IsFore_Attack", false);
         animator.SetBool("IsBack_Attack", false);
         animator.SetBool("IsRight_Attack", false);
+    }
+
+    public void Dead()
+    {
+        if (isDead) return; // 이미 사망 상태면 실행 안 함
+
+        isDead = true;
+        ResetAnimations(); // 모든 애니메이션 초기화
+        animator.SetTrigger("IsDie"); // 트리거 실행
+        Debug.Log("플레이어 사망 애니메이션 실행");
     }
 }

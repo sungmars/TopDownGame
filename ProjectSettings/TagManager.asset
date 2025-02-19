@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NPC
   - Potal
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - NPC
   - Water
   - UI
-  - 
-  - 
+  - Monster
+  - Player
   - 
   - 
   - 
