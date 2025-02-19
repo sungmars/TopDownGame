@@ -4,7 +4,7 @@ public class Base_HP : MonoBehaviour
 {
     public int MaxHP { get; protected set; }
     public int CurrentHP { get; protected set; }
-    private bool isDead = false;
+    public bool isDead = false;
     private Rigidbody2D rb;
 
     protected virtual void Start()
