@@ -9,6 +9,8 @@ public class Monster_HP : Base_HP
     private bool isDie = false;
     private Vector2 knockbackVelocity;
     private bool isKnockedBack = false; // 넉백 상태 확인
+    private SpriteRenderer spriteRenderer;
+    private Coroutine blinkCoroutine; // 깜빡임 코루틴 참조
 
     protected override void Start()
     {
@@ -16,6 +18,7 @@ public class Monster_HP : Base_HP
         base.Start();
         mrb = GetComponent<Rigidbody2D>();
         monster = GetComponent<Base_Monster>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public override void TakeDamage(int damage)
@@ -24,6 +27,13 @@ public class Monster_HP : Base_HP
 
         base.TakeDamage(damage);
         Knockback(GameObject.FindGameObjectWithTag("Player").transform.position);
+
+        // 기존에 실행 중이던 깜빡임 효과 중지 후 새로 시작
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+        }
+        blinkCoroutine = StartCoroutine(BlinkEffect());
     }
 
     private void Knockback(Vector2 playerPosition)
@@ -65,12 +75,36 @@ public class Monster_HP : Base_HP
         Debug.Log("몬스터 넉백 속도 초기화됨");
     }
 
+    private IEnumerator BlinkEffect()
+    {
+        float blinkDuration = 2f; // 2초 동안 깜빡임
+        float blinkInterval = 0.2f; // 깜빡이는 간격
+
+        float timer = 0f;
+        while (timer < blinkDuration)
+        {
+            spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f); // 반투명
+            yield return new WaitForSeconds(blinkInterval);
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // 원래 상태
+            yield return new WaitForSeconds(blinkInterval);
+            timer += blinkInterval * 2;
+        }
+    }
+
     protected override void Die()
     {
         if (isDie) return; // 중복 실행 방지
         isDie = true;
         isKnockedBack = false; // 사망 시 넉백 중지
         mrb.velocity = Vector2.zero; // 사망 시 즉시 멈춤
+
+        // 사망 시 깜빡임 중지 및 원래 색상 복원
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // 원래 상태
+        }
+
         Debug.Log("몬스터가 사망했습니다.");
         monster.Die();
     }

@@ -10,13 +10,16 @@ public class Player_HP : Base_HP
     private new bool isDead = false;
     private Vector2 knockbackVelocity;
     private bool isKnockedBack = false; // 넉백 상태 확인
+    private SpriteRenderer spriteRenderer;
+    private Coroutine blinkCoroutine; // 깜빡임 코루틴 참조
 
     protected override void Start()
     {
         MaxHP = 100;
         base.Start();
         rb = GetComponent<Rigidbody2D>();
-        playerAnimation = GetComponent<Player_Animation>();
+        playerAnimation = GetComponentInChildren<Player_Animation>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     public override void TakeDamage(int damage)
@@ -80,9 +83,41 @@ public class Player_HP : Base_HP
     {
         isInvincible = true;
         Debug.Log("플레이어 무적 상태 시작");
+
+        // 기존에 실행 중이던 깜빡임 효과 중지 후 새로 시작
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+        }
+        blinkCoroutine = StartCoroutine(BlinkEffect());
+
         yield return new WaitForSeconds(1f);
+
         isInvincible = false;
         Debug.Log("플레이어 무적 상태 해제");
+
+        // 깜빡임 중지 및 원래 색상 복원
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // 원래 상태
+        }
+    }
+
+    private IEnumerator BlinkEffect()
+    {
+        float blinkDuration = 1f; // 무적 시간(1초) 동안 깜빡임
+        float blinkInterval = 0.2f; // 깜빡이는 간격
+
+        float timer = 0f;
+        while (timer < blinkDuration)
+        {
+            spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f); // 반투명
+            yield return new WaitForSeconds(blinkInterval);
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // 원래 상태
+            yield return new WaitForSeconds(blinkInterval);
+            timer += blinkInterval * 2;
+        }
     }
 
     protected override void Die()
@@ -91,6 +126,14 @@ public class Player_HP : Base_HP
         isDead = true;
         isKnockedBack = false; // 사망 시 넉백 중지
         rb.velocity = Vector2.zero; // 사망 시 즉시 멈춤
+
+        // 사망 시 깜빡임 중지 및 원래 색상 복원
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // 원래 상태
+        }
+
         Debug.Log("플레이어가 사망했습니다.");
         playerAnimation.Dead(); // 사망 애니메이션 실행
     }

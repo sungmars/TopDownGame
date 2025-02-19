@@ -11,6 +11,7 @@ public class Base_Monster : MonoBehaviour
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
+    private Collider2D col; // 몬스터의 콜라이더 참조
 
     protected virtual void Start()
     {
@@ -18,6 +19,7 @@ public class Base_Monster : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>(); // 몬스터의 콜라이더 가져오기
     }
 
     protected virtual void Update()
@@ -41,6 +43,8 @@ public class Base_Monster : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        if (isDead) return; // 사망 상태일 경우 충돌 무시
+
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Player_HP>()?.TakeDamage(damage);
@@ -54,6 +58,17 @@ public class Base_Monster : MonoBehaviour
         isDead = true;
         animator.SetBool("IsDie", true);
         rb.velocity = Vector2.zero; // 죽을 때 이동 멈춤
+
+        // 콜라이더 트리거 활성화 (죽은 후 충돌 무시)
+        if (col != null)
+        {
+            col.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogWarning("콜라이더를 찾을 수 없습니다. Base_Monster에 Collider2D가 있는지 확인하세요.");
+        }
+
         Destroy(gameObject, 1.5f); // 1.5초 후 제거
         Debug.Log(gameObject.name + "이(가) 사망했습니다.");
     }
