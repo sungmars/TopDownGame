@@ -31,9 +31,9 @@ public class PIG_Talk : NPC_Talk
 
     private void SetDialogueBasedOnScore()
     {
-        int bestScore = PlayerPrefs.GetInt("BestScore", -1); // 저장된 최고 점수 가져오기
+        int bestScore = PlayerPrefs.GetInt("BestScore", 0); // 저장된 최고 점수 가져오기
 
-        if (bestScore == -1)
+        if (bestScore == 0)
         {
             
         }
