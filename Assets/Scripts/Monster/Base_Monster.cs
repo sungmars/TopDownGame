@@ -41,7 +41,7 @@ public class Base_Monster : MonoBehaviour
         animator.SetBool("IsWalking", true);
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         if (isDead) return; // 사망 상태일 경우 충돌 무시
 

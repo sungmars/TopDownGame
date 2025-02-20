@@ -133,7 +133,12 @@ public class Player_HP : Base_HP
             spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // 원래 상태
         }
 
+        GetComponent<PlayerController>().enabled = false;
+        GetComponent<Player_Attack>().enabled = false;
+        prb.simulated = false; // 물리 충돌도 비활성화
+
         Debug.Log("플레이어가 사망했습니다.");
         playerAnimation.Dead(); // 사망 애니메이션 실행
     }
+
 }
