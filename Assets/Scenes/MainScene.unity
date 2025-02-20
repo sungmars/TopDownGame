@@ -37948,7 +37948,7 @@ GameObject:
   - component: {fileID: 916308498}
   - component: {fileID: 916308497}
   - component: {fileID: 916308501}
-  - component: {fileID: 916308500}
+  - component: {fileID: 916308502}
   m_Layer: 3
   m_Name: Pig
   m_TagString: NPC
@@ -38044,39 +38044,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &916308500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 916308496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad6afe11596d4ef489dcf9ca7deae870, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueUI: {fileID: 2078963679}
-  nameText: {fileID: 1391383790}
-  dialogueText: {fileID: 420541805}
-  npcName: "\uB3FC\uC9C0"
-  dialogueLines:
-  - "\uB10C \uBB50\uC57C? \uC65C \uCC3E\uC544\uC654\uC5B4?"
-  - "\uC544 \uADF8\uB798, \uADF8 \uB188\uC774 \uC2DC\uCF1C\uC11C \uC628\uAC70\uAD6C\uB098."
-  - "\uBD84\uBA85 \uC67C\uCABD \uAE38\uC5D0 \uD568\uC815\uC744 \uC124\uCE58\uD588\uB294\uB370..."
-  - "\uBB50 \uC88B\uC544. \uADF8\uB798\uC11C \uBB50 \uC5B4\uCA4C\uC790\uACE0?"
-  - "\uC65C \uADF8\uB7F0\uC9D3\uC744 \uD588\uB0D0\uACE0?"
-  - "\uB0B4 \uC9D1\uB9C8\uB2F9 \uC548\uBCF4\uC5EC?"
-  - "\uADF8 \uC18C\uAC00 \uADFC\uCC98 \uD480\uC744 \uB2E4 \uB72F\uC5B4\uC11C \uD669\uBB34\uC9C0\uAC00
-    \uB410\uB2E4\uACE0."
-  - "\uC774 \uC815\uB3C4\uBA74 \uADF8\uB7F4\uB9CC\uD588\uC9C0?"
-  - "\uB10C \uADF8\uB188 \uCE5C\uAD6C\uC778\uB4EF\uD558\uB2C8 \uC774\uB300\uB85C
-    \uBCF4\uB0BC\uC21C\uC5C6\uB2E4."
-  - "\uBCF4\uB0B4\uB2EC\uB77C\uACE0?"
-  - "\uADF8\uB798 \uB9C8\uCE68 \uB0B4\uAC00 \uC694\uC998 \uD0D1\uC313\uAE30 \uAC8C\uC784\uC5D0
-    \uBE60\uC84C\uB294\uB370"
-  - "\uB0B4 \uAE30\uB85D\uC744 \uB6F0\uC5B4\uB118\uC73C\uBA74 \uBCF4\uB0B4\uC904\uAC8C"
-  typingSpeed: 0.05
 --- !u!61 &916308501
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38122,6 +38089,39 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &916308502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916308496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb51bf9bd8ca004ca420fff861d6ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueUI: {fileID: 2078963679}
+  nameText: {fileID: 1391383790}
+  dialogueText: {fileID: 420541805}
+  npcName: "\uB3FC\uC9C0"
+  dialogueLines:
+  - "\uB10C \uBB50\uC57C? \uC65C \uCC3E\uC544\uC654\uC5B4?"
+  - "\uC544 \uADF8\uB798, \uADF8 \uB188\uC774 \uC2DC\uCF1C\uC11C \uC628\uAC70\uAD6C\uB098."
+  - "\uBD84\uBA85 \uC67C\uCABD \uAE38\uC5D0 \uD568\uC815\uC744 \uC124\uCE58\uD588\uB294\uB370..."
+  - "\uBB50 \uC88B\uC544. \uADF8\uB798\uC11C \uBB50 \uC5B4\uCA4C\uC790\uACE0?"
+  - "\uC65C \uADF8\uB7F0\uC9D3\uC744 \uD588\uB0D0\uACE0?"
+  - "\uB0B4 \uC9D1\uB9C8\uB2F9 \uC548\uBCF4\uC5EC?"
+  - "\uADF8 \uC18C\uAC00 \uADFC\uCC98 \uD480\uC744 \uB2E4 \uB72F\uC5B4\uC11C \uD669\uBB34\uC9C0\uAC00
+    \uB410\uB2E4\uACE0."
+  - "\uC774 \uC815\uB3C4\uBA74 \uADF8\uB7F4\uB9CC\uD588\uC9C0?"
+  - "\uB10C \uADF8\uB188 \uCE5C\uAD6C\uC778\uB4EF\uD558\uB2C8 \uC774\uB300\uB85C
+    \uBCF4\uB0BC\uC21C\uC5C6\uB2E4."
+  - "\uBCF4\uB0B4\uB2EC\uB77C\uACE0?"
+  - "\uADF8\uB798 \uB9C8\uCE68 \uB0B4\uAC00 \uC694\uC998 \uD0D1\uC313\uAE30 \uAC8C\uC784\uC5D0
+    \uBE60\uC84C\uB294\uB370"
+  - "\uB0B4 \uAE30\uB85D\uC744 \uB6F0\uC5B4\uB118\uC73C\uBA74 \uBCF4\uB0B4\uC904\uAC8C"
+  typingSpeed: 0.05
 --- !u!1 &933144715
 GameObject:
   m_ObjectHideFlags: 0

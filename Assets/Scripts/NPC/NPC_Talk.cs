@@ -75,7 +75,7 @@ public class NPC_Talk : MonoBehaviour
         }
     }
 
-    private void EndDialogue()
+    protected virtual void EndDialogue()
     {
         dialogueUI.SetActive(false); // 대화창 닫기
         isTalking = false;
