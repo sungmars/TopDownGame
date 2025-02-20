@@ -11,7 +11,7 @@ public class Player_HP : Base_HP
     private bool isKnockedBack = false; // 넉백 상태 확인
     private SpriteRenderer spriteRenderer;
     private Coroutine blinkCoroutine; // 깜빡임 코루틴 참조
-
+    public GameObject GameOver;//활성화할 게임오버 패널
     protected override void Start()
     {
         MaxHP = 100;
@@ -19,6 +19,7 @@ public class Player_HP : Base_HP
         prb = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponentInChildren<Player_Animation>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        GameOver.SetActive(false);
     }
 
     public override void TakeDamage(int damage)
@@ -125,7 +126,7 @@ public class Player_HP : Base_HP
         isDead = true;
         isKnockedBack = false; // 사망 시 넉백 중지
         prb.velocity = Vector2.zero; // 사망 시 즉시 멈춤
-
+        GameOver.SetActive(true);
         // 사망 시 깜빡임 중지 및 원래 색상 복원
         if (blinkCoroutine != null)
         {
