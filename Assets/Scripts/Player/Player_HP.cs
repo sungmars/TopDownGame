@@ -4,10 +4,9 @@ using System.Collections;
 public class Player_HP : Base_HP
 {
     public float knockbackForce = 3f; // 넉백 힘
-    private Rigidbody2D rb;
+    private Rigidbody2D prb;
     private bool isInvincible = false; // 무적 상태
     private Player_Animation playerAnimation;
-    private new bool isDead = false;
     private Vector2 knockbackVelocity;
     private bool isKnockedBack = false; // 넉백 상태 확인
     private SpriteRenderer spriteRenderer;
@@ -17,7 +16,7 @@ public class Player_HP : Base_HP
     {
         MaxHP = 100;
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
+        prb = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponentInChildren<Player_Animation>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
@@ -66,8 +65,8 @@ public class Player_HP : Base_HP
     {
         if (isKnockedBack)
         {
-            rb.velocity = knockbackVelocity;
-            Debug.Log($"넉백 적용 중: {rb.velocity}");
+            prb.velocity = knockbackVelocity;
+            Debug.Log($"넉백 적용 중: {prb.velocity}");
         }
     }
 
@@ -75,7 +74,7 @@ public class Player_HP : Base_HP
     {
         yield return new WaitForSeconds(0.5f); // 넉백 지속 시간 증가
         isKnockedBack = false;
-        rb.velocity = Vector2.zero;
+        prb.velocity = Vector2.zero;
         Debug.Log("넉백 속도 초기화됨");
     }
 
@@ -125,7 +124,7 @@ public class Player_HP : Base_HP
         if (isDead) return; // 중복 실행 방지
         isDead = true;
         isKnockedBack = false; // 사망 시 넉백 중지
-        rb.velocity = Vector2.zero; // 사망 시 즉시 멈춤
+        prb.velocity = Vector2.zero; // 사망 시 즉시 멈춤
 
         // 사망 시 깜빡임 중지 및 원래 색상 복원
         if (blinkCoroutine != null)
