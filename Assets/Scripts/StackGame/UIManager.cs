@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum UIState
 {
@@ -59,11 +60,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickExit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit(); // 어플리케이션 종료
-#endif
+        SceneManager.LoadScene("MainScene");
     }
     public void UpdateScore()
     {
